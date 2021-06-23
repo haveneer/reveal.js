@@ -276,7 +276,11 @@ gulp.task('package', gulp.series('default', () =>
         './lib/**',
         './images/**',
         './plugin/**',
-        './**.md'
+        './**.md',
+        './slides/*/*.html',
+        './slides/*/css/*.css',
+        './slides/*/**/*.css',
+        './slides/*/**/*.js',
     ]).pipe(zip('reveal-js-presentation.zip')).pipe(gulp.dest('./'))
 
 ))
@@ -293,7 +297,14 @@ gulp.task('serve', () => {
         livereload: true
     })
 
-    gulp.watch(['*.html', '*.md'], gulp.series('reload'))
+    gulp.watch([
+        '*.html', 
+        '*.md',
+        './slides/*/*.html',
+        './slides/*/css/*.css',
+        './slides/*/**/*.css',
+        './slides/*/**/*.js',
+    ], gulp.series('reload'))
 
     gulp.watch(['js/**'], gulp.series('js', 'reload', 'test'))
 
